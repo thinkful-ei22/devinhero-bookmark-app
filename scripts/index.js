@@ -1,4 +1,4 @@
-/* global bookmarks,  api */
+/* global store, api, bookmarks */
 
 'use strict';
 
@@ -8,7 +8,9 @@ $(document).ready(function() {
   bookmarks.bindEventListeners();
   
   api.getBookmarks(function(response){
-    console.log('Get Items initial: ', response);
+    console.log('Get API items: ', response);
+    response.forEach(bookmark => store.addBookmark(bookmark));
+    console.log('Store bookmarks: ', store.bookmarks);
   });
 
   bookmarks.render();
