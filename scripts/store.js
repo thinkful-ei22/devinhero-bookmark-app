@@ -6,7 +6,15 @@ const store = (function(){
   
   //Add bookmark
   const addBookmark = function(bookmark){
-    this.bookmarks.push(bookmark);
+    let newBook = {
+      id: bookmark.id,
+      title: bookmark.title,
+      rating: bookmark.rating,
+      desc: bookmark.desc,
+      expanded: false
+    };
+    
+    this.bookmarks.push(newBook);
   };
 
   //Delete bookmark

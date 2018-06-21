@@ -60,12 +60,14 @@ const bookmarks = (function(){
   };
 
   const generateBookmarkItemHTML = function (bookmark){
-    return `
+    let itemString = `
           <li class="bookmark-item" data-bookmark-id="${bookmark.id}">
             <div class="bookmark-item-head">
               <button class="bookmark-item-title">${bookmark.title}</button>
               <span class="bookmark-item-rating">Rating: ${generateBookmarkStarsHTML(bookmark.rating)}</span>
-            </div>
+            </div>`;
+    if(bookmark.expanded){
+      itemString += `
             <div class="bookmark-item-content">
               <div class="bookmark-item-description">
                 ${bookmark.desc}
@@ -76,6 +78,8 @@ const bookmarks = (function(){
               </div>
             </div>
           </li>`;
+    }
+    return itemString;
   };
 
   const generateBookmarkStarsHTML = function(rating){
@@ -134,6 +138,12 @@ const bookmarks = (function(){
   //Submit New Bookmark 
 
   //Expand Bookmark
+  const handleExpandBookmarkToggle = function(){
+    $('.js-bookmarks-list').on('click', 'li', event =>{
+      console.log('Click!');
+    });
+
+  };
 
   //Remove Bookmark
 
@@ -143,6 +153,7 @@ const bookmarks = (function(){
   const bindEventListeners = function(){
     handleNewBookmarkBtn();
     handleStarFilterChange();
+    handleExpandBookmarkToggle();
   };
   
   return {
