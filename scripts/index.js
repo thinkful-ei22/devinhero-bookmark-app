@@ -11,9 +11,10 @@ $(document).ready(function() {
     console.log('Get API items: ', response);
     response.forEach(bookmark => store.addBookmark(bookmark));
     console.log('Store bookmarks: ', store.bookmarks);
+    bookmarks.render();
   });
 
-  bookmarks.render();
+  
 });
   
   // api.createBookmark('METAL, But Not', 'https://www.youtube.com/watch?v=dndsJunKgaY', 3, 'wow', function(response){

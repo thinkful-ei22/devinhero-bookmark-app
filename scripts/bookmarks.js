@@ -13,18 +13,19 @@ const bookmarks = (function(){
     console.log('Rendering DOM');
     
     if(store.addingNewBookmark){
-      $('.new-bookmark-window').html(generateAddingBookmarkWindow());
+      $('.js-new-bookmark-window').html(generateAddingBookmarkWindowHTML());
     }else{
-      $('.new-bookmark-window').html('');
+      $('.js-new-bookmark-window').html('');
     }
 
+    const bookmarksHTML = store.bookmarks.map(bookmark => 
+      generateBookmarkItemHTML(bookmark)).join('');
 
-    //Populate bookmarks list
+    $('.js-bookmarks-list').html(bookmarksHTML);
 
   };
-
   
-  const generateAddingBookmarkWindow = function(){
+  const generateAddingBookmarkWindowHTML = function(){
     return `
         <form class="js-new-bookmark-form new-bookmark-form">
           <p>
@@ -52,6 +53,38 @@ const bookmarks = (function(){
           <input type="submit">
           ${generateError()}
         </form>`;
+  };
+
+  const generateBookmarkItemHTML = function (bookmark){
+    return `
+          <li class="bookmark-item" data-bookmark-id="${bookmark.id}">
+            <div class="bookmark-item-head">
+              <button class="bookmark-item-title">${bookmark.title}</button>
+              <span class="bookmark-item-rating">Rating: ${generateBookmarkStarsHTML(bookmark.rating)}</span>
+            </div>
+            <div class="bookmark-item-content">
+              <div class="bookmark-item-description">
+                ${bookmark.desc}
+              </div>
+              <div class="bookmark-item-buttons">
+                <a href="${bookmark.url}">Visit Page</a>
+                <input type="button" value="Remove 'Mark" class="js-bookmark-remove">
+              </div>
+            </div>
+          </li>`;
+  };
+
+  const generateBookmarkStarsHTML = function(rating){
+    let stars = '';
+    for(let i = 0; i < 5; i++){
+      if(rating > i){
+        stars += ' /STAR\\';
+      }else{
+        stars += ' /star\\';
+      }
+    }
+
+    return stars;
   };
 
   const generateError = function(){
