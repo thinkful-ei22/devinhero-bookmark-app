@@ -18,11 +18,15 @@ const bookmarks = (function(){
       $('.js-new-bookmark-window').html('');
     }
 
-    const bookmarksHTML = store.bookmarks.map(bookmark => 
-      generateBookmarkItemHTML(bookmark)).join('');
-
+    const bookmarksHTML = store.bookmarks.map(bookmark =>{
+      if(bookmark.rating >= store.minRating){
+        return generateBookmarkItemHTML(bookmark);
+      }else{
+        return '';
+      }
+    }).join('');
+      
     $('.js-bookmarks-list').html(bookmarksHTML);
-
   };
   
   const generateAddingBookmarkWindowHTML = function(){
@@ -101,13 +105,20 @@ const bookmarks = (function(){
 
 
 
-  //// Bookmark list functionality ////
+  //// Bookmark item functionality ////
 
 
 
   //// Event handlers ////
 
   //Star rating filter change
+  const handleStarFilterChange = function(){
+    $('.js-star-filter').change(function(){
+      console.log('Changing min filter: ', this.value);
+      store.changeMinRating(this.value);
+      render();
+    });
+  };
 
   //Toggle New Bookmark Window
   const handleNewBookmarkBtn = function(){
@@ -131,6 +142,7 @@ const bookmarks = (function(){
   
   const bindEventListeners = function(){
     handleNewBookmarkBtn();
+    handleStarFilterChange();
   };
   
   return {

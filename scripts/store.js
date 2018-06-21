@@ -18,6 +18,9 @@ const store = (function(){
   };
 
   //Change minRating
+  const changeMinRating = function(rating){
+    this.minRating = rating;
+  };
 
   //Change errorMsg
   
@@ -31,7 +34,7 @@ const store = (function(){
     addBookmark,
     //delete
     toggleAddingNewBookmark,
-    //change minRating
+    changeMinRating,
     //change errorMsg
   };
 }() );
