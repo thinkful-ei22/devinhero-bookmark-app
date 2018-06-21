@@ -4,13 +4,18 @@ console.log('store.js');
 
 const store = (function(){
   
-  
-  
-  //Add item
+  //Add bookmark
+  // const addBookmark = function(bookmark){
+  //   this.bookmarks.push(bookmark);
+  // };
 
-  //Delete item
+  //Delete bookmark
 
   //Toggle addingNewBookmark
+  const toggleAddingNewBookmark = function(){
+    this.errorMsg = '';
+    this.addingNewBookmark = !this.addingNewBookmark;
+  };
 
   //Change minRating
 
@@ -23,6 +28,7 @@ const store = (function(){
     minRating: 1,
     errorMsg: undefined,
 
+    toggleAddingNewBookmark,
 
   };
 }() );

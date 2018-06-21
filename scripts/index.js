@@ -11,7 +11,7 @@ $(document).ready(function() {
     console.log('Get Items initial: ', response);
   });
 
-  
+  bookmarks.render();
 });
   
   // api.createBookmark('METAL, But Not', 'https://www.youtube.com/watch?v=dndsJunKgaY', 3, 'wow', function(response){
@@ -24,4 +24,3 @@ $(document).ready(function() {
   //   items.forEach((item) => store.addItem(item));
   //   shoppingList.render();
   // });
-});
