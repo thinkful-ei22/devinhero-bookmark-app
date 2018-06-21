@@ -12,7 +12,79 @@
   
   
   <main role="main">
+      <input type="button" class="js-add-bookmark add-bookmark-button" value="Add 'Mark">
+      <span class="star-filter-container">
+        Minimum Stars:
+        <select class="js-star-filter-dropdown star-filter-dropdown">
+          <option value="1">1 Star</option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5">5 Stars</option>
+        </select>
+      </span>
+  
+      <content class="add-bookmark-window">
+        <form class="js-add-bookmark-form add-bookmark-form">
+          <label>Name</label>
+          <input type="text" name="name">
+          <br>
+          <label>URL</label>
+          <input type="url" name="url">
+          <br>
+          <label>Rating</label>
+          <select name="rating">
+            <option value="1">1 Star</option>
+            <option value="2">2 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="5">5 Stars</option>
+          </select>
+          <br>
 
+          <label for="description">Description</label>
+          <textarea name="description">
+            </textarea>
+        </form>
+      </content>
+  
+      <content class="bookmarks">
+        <ul class="bookmarks-list js-bookmarks-list">
+          <li class="bookmark-item" data-bookmark-id="1">
+            <div class="bookmark-item-head">
+              <span class="bookmark-item-title">Mark Title!</span>
+              <span class="bookmark-item-rating">STARS I GUESS?</span>
+            </div>
+            <div class="bookmark-item-content">
+              <div class="bookmark-item-description">
+                lorem ipsum is so last decade, but we're gonna use it anyway because why not
+              </div>
+              <div class="bookmark-item-buttons">
+                <input type="button" value="View Page" class="js-bookmark-viewpage">
+                <input type="button" value="Remove 'Mark" class="js-bookmark-remove">
+              </div>
+            </div>
+          </li>
+          <li class="bookmark-item" data-bookmark-id="2">
+            <div class="bookmark-item-head">
+              <span class="bookmark-item-title">Mark Title Two!?</span>
+              <span class="bookmark-item-rating">STARS I GUESS!</span>
+            </div>
+            <div class="bookmark-item-content">
+              <div class="bookmark-item-description">
+                The last one lies, lorem ipsum is always in style
+              </div>
+              <div class="bookmark-item-buttons">
+                <input type="button" value="View Page" class="js-bookmark-viewpage">
+                <input type="button" value="Remove 'Mark" class="js-bookmark-remove">
+              </div>
+            </div>
+          </li>
+
+
+
+        </ul>
+      </content>
     
   </main>
 
