@@ -83,7 +83,8 @@ const bookmarks = (function(){
             <div class="bookmark-item-content">
               <div class="bookmark-item-description">
                 <h2>${bookmark.title}</h2>
-                ${bookmark.desc}
+                <p>Rating: ${bookmark.rating}</p>
+                <p>${bookmark.desc}</p>
               </div>
               <div class="bookmark-item-buttons">
                 <div class="bookmark-item-link-box"><a href="${bookmark.url}" class="button-style bookmark-item-link">Visit Page</a></div>
@@ -110,9 +111,9 @@ const bookmarks = (function(){
 
   const generateOneStarHTML = function(isOn){
     if(isOn){
-      return '<img src="images/star-on.png" class="star star-on" alt="star on">';
+      return '<img src="images/star-on.png" class="star star-on" alt="star-on"> ';
     }else{
-      return '<img src="images/star-off.png" class="star star-off" alt="star off">';
+      return '<img src="images/star-off.png" class="star star-off" alt="star-off"> ';
     }
   };
 
