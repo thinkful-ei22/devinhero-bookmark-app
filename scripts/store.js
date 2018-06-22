@@ -18,6 +18,13 @@ const store = (function(){
     this.bookmarks.push(newBook);
   };
 
+  const resetForm = function(){
+    this.addFormVals.title = '';
+    this.addFormVals.url = '';
+    this.addFormVals.rating = 3;
+    this.addFormVals.desc = '';
+  };
+
   //TODO: This won't work for some reason??
   const getBookmarkById = function(id){
     return this.bookmarks.find(bookmark => bookmark.id === id);
@@ -46,20 +53,32 @@ const store = (function(){
   };
 
   //Change errorMsg
+  const changeErrorMsg = function(error){
+    this.errorMsg = error;
+  };
   
   
   return {
     bookmarks: [],
+    addFormVals:{
+      title: '',
+      url: '',
+      rating: 3,
+      desc: ''
+    },
     addingNewBookmark: false,
     minRating: 1,
     errorMsg: undefined,
 
     addBookmark,
+    resetForm,
+
     getBookmarkById,
     toggleBookmarkExpanded,
     deleteBookmark,
+    
     toggleAddingNewBookmark,
     changeMinRating,
-    //change errorMsg
+    changeErrorMsg
   };
 }() );

@@ -8,10 +8,14 @@
   <title>My 'Marks</title>
 </head>
 <body>
-  <h1>My 'Marks</h1>
+  <header>
+    <h1>My 'Marks</h1>
+  </header>
   
   
   <main role="main">
+    <nav>
+      
       <input type="button" class="js-new-bookmark new-bookmark-button" value="New 'Mark">
       <span class="star-filter-container">
         Minimum Stars:
@@ -23,16 +27,17 @@
           <option value="5">5 Stars</option>
         </select>
       </span>
+    </nav>
+    
+    <div class="js-new-bookmark-container new-bookmark-container ">
       
-      <div class="js-new-bookmark-container new-bookmark-container ">
-        
-      </div>
-  
-      <content class="bookmarks">
-        <ul class="bookmarks-list js-bookmarks-list">
+    </div>
 
-        </ul>
-      </content>
+    <content class="bookmarks">
+      <ul class="bookmarks-list js-bookmarks-list">
+
+      </ul>
+    </content>
     
   </main>
 

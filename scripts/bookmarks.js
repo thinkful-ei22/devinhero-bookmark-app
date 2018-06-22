@@ -35,23 +35,23 @@ const bookmarks = (function(){
           <div class="new-bookmark-window">
             <div class="new-bookmark-form-title">Add Bookmark</div>
             <form class="js-new-bookmark-form new-bookmark-form">
-                <label>Name</label>
-                <input type="text" name="name">
+                <label>Title</label>
+                <input type="text" name="title" required>
               
                 <label>URL</label>
-                <input type="url" name="url">
+                <input type="url" name="url" required>
               
                 <label>Rating</label>
                 <select name="rating">
                   <option value="1">1 Star</option>
                   <option value="2">2 Stars</option>
-                  <option value="3">3 Stars</option>
+                  <option value="3" selected="selected">3 Stars</option>
                   <option value="4">4 Stars</option>
                   <option value="5">5 Stars</option>
                 </select>
               
                 <label for="description">Description</label>
-                <textarea name="description">Bookmark description</textarea>
+                <textarea name="description"></textarea>
               
               <input type="submit">
             </form>
@@ -149,16 +149,25 @@ const bookmarks = (function(){
   const handleSubmitNewBookmark = function(){
     $('.js-new-bookmark-container').on('submit', '.js-new-bookmark-form',event =>{
       event.preventDefault();
-      // //Grab all the data
-      // const title = $('.js-new-bookmark-form input[name=title]').val();
-      // console.log(title);
+      //Grab all the data
+      const title = $('.js-new-bookmark-form [name=title]').val();
+      console.log(title);
+      
+      const url = $('.js-new-bookmark-form [name=url]').val();
+      console.log(url);
+      const rating = $('.js-new-bookmark-form [name=rating]').val();
+      console.log(rating);
+      const desc = $('.js-new-bookmark-form [name=description]').val();
+      console.log(desc);
+
+
 
       //Verify required fields
         //set errorMsg if something fails
 
       //If verified, add item and toggle addBookmarkWindow closed
 
-      // render();
+      render();
     });
   };
 
