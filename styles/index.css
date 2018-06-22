@@ -8,6 +8,21 @@
     margin-top: 1rem;
 }
 
+body{
+    background-color: #CFE2C3;
+}
+
+main{
+    
+    width: 600px;
+    margin: auto;
+}
+
+h1{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
 .button-style{
     background-color: #82CE80;
     border: 1px solid #2E472C;
@@ -29,6 +44,26 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.nav{
+    text-align: left;
+}
+
+.new-bookmark-button{
+    font-size: 1.3rem;  
+
+}
+
+.star-filter-container{
+    margin: 0;
+    float: right;
+    text-align: right;
+    padding: 5px;
+    background-color: #F7FFF2;
+    border: 1px solid #507C4E;
+    border-radius: 2px;
+}
+
+
 .new-bookmark{
     display: block;
     width: 500px; 
@@ -36,10 +71,7 @@ body {
     margin-top: 20px;
 }
 
-.error-msg{
-    height: 1.5rem;
-    color: darkred;
-}
+
 .new-bookmark-window{
     text-align: left;
     background-color: #F7FFF2;
@@ -93,15 +125,14 @@ body {
 
 }
 
-.new-bookmark-submit-box{
-    grid-column: 2 / 3; 
-
-}
 .new-bookmark-form input[type="text"],
 .new-bookmark-form input[type="url"]{
     width: 66%;
 }
 
+.new-bookmark-form textarea{
+    height: 100px;
+}
 
 .new-bookmark-form input[type="submit"]{
     font-size: 1.5em;
@@ -110,6 +141,15 @@ body {
 
 .new-bookmark-form p > *{
     margin-top: 3px;
+}
+
+.error-msg{
+    height: 1.5rem;
+    color: darkred;
+}
+
+.bookmarks{
+    display:block;
 }
 
 .bookmark-list{
@@ -124,7 +164,6 @@ body {
 
 .bookmark-item{
     margin: auto;
-    width: 600px;
 }
 
 .bookmark-item-head{
@@ -176,8 +215,9 @@ body {
 }
 
 .bookmark-item-description h2{
-    font-size: 1.2rem;
+    width: 80%;
     margin-bottom: 20px;
+    font-size: 1.2rem;
 }
 
 .bookmark-item-buttons{

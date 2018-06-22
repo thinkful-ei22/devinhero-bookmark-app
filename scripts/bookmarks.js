@@ -152,10 +152,8 @@ const bookmarks = (function(){
   const handleNewBookmarkBtn = function(){
     
     $('.new-bookmark-button').click(() => {
-      console.log('Toggling New Bookmark window');
       store.toggleAddingNewBookmark();
       render();
-      console.log('Window rendered. state: ', store.addingNewBookmark);
     });
   };
 
@@ -179,7 +177,7 @@ const bookmarks = (function(){
         render();
       }, function(response){
         //something went wrong
-        store.setErrorMsg(`Error adding item: ${response.responseJSON.message}`);
+        store.setErrorMsg(`Error adding bookmark: ${response.responseJSON.message}`);
         render();
       });
     });
@@ -203,10 +201,10 @@ const bookmarks = (function(){
         store.deleteBookmark(id);
         render();
       },function(response){
-        //TODO: Feed to DOM instead
-        console.log('Error deleting item: ', response.responseJSON.message);
+        //Something went wrong
+        store.setErrorMsg(`Error deleting bookmark: ${response.responseJSON.message}`);
+        render();
       });
-      render();
     });
   };
 
