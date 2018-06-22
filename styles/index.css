@@ -14,13 +14,55 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.new-bookmark-form{
-    text-align: left;
-    border: 1px solid black;
-    width: 600px;
+.new-bookmark{
+    display: block;
+    width: 500px; 
     margin: auto;
     margin-top: 20px;
+}
+
+.add-error-msg{
+    height: 1.5rem;
+}
+.new-bookmark-window{
+    text-align: left;
+    border: 1px solid black;
     padding: 10px;
+}
+
+.new-bookmark-form-title{
+    text-align: center;
+}
+.new-bookmark-form{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-gap: 16px;
+}
+
+
+.new-bookmark-form input,
+.new-bookmark-form select,
+.new-bookmark-form textarea,
+.new-bookmark-form button,
+.new-bookmark-form label {
+    margin-top: 0;
+}
+
+.new-bookmark-form label {
+    text-align: right;
+    grid-column: 1 / 2;
+}
+ 
+.new-bookmark-form input,
+.new-bookmark-form select,
+.new-bookmark-form textarea,
+.new-bookmark-form button {
+    grid-column: 2 / 3;
+}
+
+.new-bookmark-form-title{
+    font-size: 1.5em;
+    text-align: center;
 }
 
 .new-bookmark-form p > *{

@@ -13,9 +13,9 @@ const bookmarks = (function(){
     console.log('Rendering DOM');
     
     if(store.addingNewBookmark){
-      $('.js-new-bookmark-window').html(generateAddingBookmarkWindowHTML());
+      $('.js-new-bookmark-container').html(generateAddingBookmarkWindowHTML());
     }else{
-      $('.js-new-bookmark-window').html('');
+      $('.js-new-bookmark-container').html('');
     }
 
     const bookmarksHTML = store.bookmarks.map(bookmark =>{
@@ -31,32 +31,33 @@ const bookmarks = (function(){
   
   const generateAddingBookmarkWindowHTML = function(){
     return `
-        <form class="js-new-bookmark-form new-bookmark-form">
-          <p>
-            <label>Name</label>
-            <input type="text" name="name">
-          </p>
-          <p>
-            <label>URL</label>
-            <input type="url" name="url">
-          </p>
-          <p>
-            <label>Rating</label>
-            <select name="rating">
-              <option value="1">1 Star</option>
-              <option value="2">2 Stars</option>
-              <option value="3">3 Stars</option>
-              <option value="4">4 Stars</option>
-              <option value="5">5 Stars</option>
-            </select>
-          </p>
-          <p>
-            <label for="description">Description</label>
-            <textarea name="description">Bookmark description</textarea>
-          </p>
-          <input type="submit">
-          ${generateError()}
-        </form>`;
+        <content class="new-bookmark">
+          <div class="new-bookmark-window">
+            <div class="new-bookmark-form-title">Add Bookmark</div>
+            <form class="js-new-bookmark-form new-bookmark-form">
+                <label>Name</label>
+                <input type="text" name="name">
+              
+                <label>URL</label>
+                <input type="url" name="url">
+              
+                <label>Rating</label>
+                <select name="rating">
+                  <option value="1">1 Star</option>
+                  <option value="2">2 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="5">5 Stars</option>
+                </select>
+              
+                <label for="description">Description</label>
+                <textarea name="description">Bookmark description</textarea>
+              
+              <input type="submit">
+            </form>
+          </div>
+          <div class="add-error-msg">${generateError()}</p>
+        </content>`;
   };
 
   const generateBookmarkItemHTML = function (bookmark){
@@ -99,6 +100,7 @@ const bookmarks = (function(){
   const generateError = function(){
     if(store.errorMsg){
       const err = store.errorMsg;
+      store.errorMsg = '';
       return `Cannot add bookmark: ${err}`;
     }else{
       return '';
@@ -144,6 +146,21 @@ const bookmarks = (function(){
   };
 
   //Submit New Bookmark 
+  const handleSubmitNewBookmark = function(){
+    $('.js-new-bookmark-container').on('submit', '.js-new-bookmark-form',event =>{
+      event.preventDefault();
+      // //Grab all the data
+      // const title = $('.js-new-bookmark-form input[name=title]').val();
+      // console.log(title);
+
+      //Verify required fields
+        //set errorMsg if something fails
+
+      //If verified, add item and toggle addBookmarkWindow closed
+
+      // render();
+    });
+  };
 
   //Expand Bookmark
   const handleExpandBookmarkToggle = function(){
@@ -176,6 +193,7 @@ const bookmarks = (function(){
   const bindEventListeners = function(){
     handleNewBookmarkBtn();
     handleStarFilterChange();
+    handleSubmitNewBookmark();
     handleExpandBookmarkToggle();
     handleBookmarkDelete();
     
