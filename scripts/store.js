@@ -17,6 +17,17 @@ const store = (function(){
     this.bookmarks.push(newBook);
   };
 
+  //TODO: This won't work for some reason??
+  const getBookmarkById = function(id){
+    return this.bookmarks.find(bookmark => bookmark.id === id);
+  };
+
+  const toggleBookmarkExpanded = function(id){
+    const bookmark = this.bookmarks.find(bookmark => bookmark.id === id); //This works, but getBookmarkById doesn't??
+    
+    Object.assign(bookmark, {expanded: !bookmark.expanded});
+  };
+
   //Delete bookmark
 
   //Toggle addingNewBookmark
@@ -40,6 +51,8 @@ const store = (function(){
     errorMsg: undefined,
 
     addBookmark,
+    getBookmarkById,
+    toggleBookmarkExpanded,
     //delete
     toggleAddingNewBookmark,
     changeMinRating,

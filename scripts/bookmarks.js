@@ -61,11 +61,12 @@ const bookmarks = (function(){
 
   const generateBookmarkItemHTML = function (bookmark){
     let itemString = `
-          <li class="bookmark-item" data-bookmark-id="${bookmark.id}">
+          <li class="bookmark-item js-bookmark-item" data-bookmark-id="${bookmark.id}">
             <div class="bookmark-item-head">
-              <button class="bookmark-item-title">${bookmark.title}</button>
+              <button class="js-bookmark-item-expand"><span class="bookmark-item-title-label">${bookmark.title}</span></button>
               <span class="bookmark-item-rating">Rating: ${generateBookmarkStarsHTML(bookmark.rating)}</span>
             </div>`;
+    
     if(bookmark.expanded){
       itemString += `
             <div class="bookmark-item-content">
@@ -74,7 +75,7 @@ const bookmarks = (function(){
               </div>
               <div class="bookmark-item-buttons">
                 <a href="${bookmark.url}">Visit Page</a>
-                <input type="button" value="Remove 'Mark" class="js-bookmark-remove">
+                <input type="button" value="Remove 'Mark" class="js-bookmark-item-remove">
               </div>
             </div>
           </li>`;
@@ -112,6 +113,13 @@ const bookmarks = (function(){
   //// Bookmark item functionality ////
 
 
+  function getBookmarkIdFromElement(bookmark) {
+    const newTarget = $(bookmark)
+      .closest('.js-bookmark-item')
+      .data('bookmark-id');
+    
+    return newTarget;
+  }
 
   //// Event handlers ////
 
@@ -139,13 +147,22 @@ const bookmarks = (function(){
 
   //Expand Bookmark
   const handleExpandBookmarkToggle = function(){
-    $('.js-bookmarks-list').on('click', 'li', event =>{
-      console.log('Click!');
+    $('.js-bookmarks-list').on('click', '.js-bookmark-item-expand', event =>{
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      store.toggleBookmarkExpanded(id);
+      render();
     });
-
   };
 
   //Remove Bookmark
+  const handleBookmarkDelete = function(){
+    $('.js-bookmarks-list').on('click', '.js-bookmark-item-remove', event =>{
+      const id = getBookmarkIdFromElement(event.currentTarget);
+      console.log('delete ', id);
+      
+      render();
+    });
+  };
 
   //// Etc ////
   
@@ -154,6 +171,8 @@ const bookmarks = (function(){
     handleNewBookmarkBtn();
     handleStarFilterChange();
     handleExpandBookmarkToggle();
+    handleBookmarkDelete();
+    
   };
   
   return {
