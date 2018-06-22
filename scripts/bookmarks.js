@@ -159,7 +159,13 @@ const bookmarks = (function(){
     $('.js-bookmarks-list').on('click', '.js-bookmark-item-remove', event =>{
       const id = getBookmarkIdFromElement(event.currentTarget);
       console.log('delete ', id);
-      
+      api.deleteBookmark(id, function(response){
+        store.deleteBookmark(id);
+        render();
+      },function(response){
+        //TODO: Feed to DOM instead
+        console.log('Error deleting item: ', response.responseJSON.message);
+      });
       render();
     });
   };

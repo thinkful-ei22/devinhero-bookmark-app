@@ -29,6 +29,9 @@ const store = (function(){
   };
 
   //Delete bookmark
+  const deleteBookmark = function(id){
+    this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
+  };
 
   //Toggle addingNewBookmark
   const toggleAddingNewBookmark = function(){
@@ -53,7 +56,7 @@ const store = (function(){
     addBookmark,
     getBookmarkById,
     toggleBookmarkExpanded,
-    //delete
+    deleteBookmark,
     toggleAddingNewBookmark,
     changeMinRating,
     //change errorMsg
