@@ -11,6 +11,7 @@ const store = (function(){
       title: bookmark.title,
       rating: bookmark.rating,
       desc: bookmark.desc,
+      url: bookmark.url,
       expanded: false
     };
     
