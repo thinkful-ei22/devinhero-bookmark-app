@@ -25,6 +25,8 @@ const bookmarks = (function(){
         return '';
       }
     }).join('');
+
+    $('.error-msg').html(generateError);
       
     $('.js-bookmarks-list').html(bookmarksHTML);
   };
@@ -33,30 +35,36 @@ const bookmarks = (function(){
     return `
         <content class="new-bookmark">
           <div class="new-bookmark-window">
-            <div class="new-bookmark-form-title">Add Bookmark</div>
+            <h2 class="new-bookmark-form-title">Add Bookmark</h2>
             <form class="js-new-bookmark-form new-bookmark-form">
                 <label>Title</label>
-                <input type="text" name="title" required>
-              
+                <div class="new-bookmark-input-box">
+                  <input type="text" name="title" required>
+                </div>
+
                 <label>URL</label>
-                <input type="url" name="url" required>
-              
+                <div class="new-bookmark-input-box">
+                  <input type="url" name="url" required>
+                </div>
+
                 <label>Rating</label>
-                <select name="rating">
-                  <option value="1">1 Star</option>
-                  <option value="2">2 Stars</option>
-                  <option value="3" selected="selected">3 Stars</option>
-                  <option value="4">4 Stars</option>
-                  <option value="5">5 Stars</option>
-                </select>
+                <div class="new-bookmark-input-box">
+                  <select name="rating">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3" selected="selected">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                  </select>
+                </div
               
                 <label for="description">Description</label>
                 <textarea name="description"></textarea>
-              
-              <input type="submit">
+                <div class="new-bookmark-submit-box">
+                  <input type="submit" value="Add 'Mark" class="button-style">
+                </div>
             </form>
           </div>
-          <div class="add-error-msg">${generateError()}</p>
         </content>`;
   };
 
@@ -64,19 +72,22 @@ const bookmarks = (function(){
     let itemString = `
           <li class="bookmark-item js-bookmark-item" data-bookmark-id="${bookmark.id}">
             <div class="bookmark-item-head">
-              <button class="js-bookmark-item-expand"><span class="bookmark-item-title-label">${bookmark.title}</span></button>
-              <span class="bookmark-item-rating">Rating: ${generateBookmarkStarsHTML(bookmark.rating)}</span>
+              <button class="bookmark-item-expand js-bookmark-item-expand">
+                <div class="bookmark-item-title-label">${bookmark.title}</div>
+                <div class="bookmark-item-rating">${generateBookmarkStarsHTML(bookmark.rating)}</div>
+              </button>
             </div>`;
     
     if(bookmark.expanded){
       itemString += `
             <div class="bookmark-item-content">
               <div class="bookmark-item-description">
+                <h2>${bookmark.title}</h2>
                 ${bookmark.desc}
               </div>
               <div class="bookmark-item-buttons">
-                <a href="${bookmark.url}">Visit Page</a>
-                <input type="button" value="Remove 'Mark" class="js-bookmark-item-remove">
+                <div class="bookmark-item-link-box"><a href="${bookmark.url}" class="button-style bookmark-item-link">Visit Page</a></div>
+                <div class="bookmark-item-remove-box"><input type="button" value="Remove 'Mark" class="bookmark-item-remove js-bookmark-item-remove button-style"></div>
               </div>
             </div>
           </li>`;
@@ -88,29 +99,32 @@ const bookmarks = (function(){
     let stars = '';
     for(let i = 0; i < 5; i++){
       if(rating > i){
-        stars += ' /STAR\\';
+        stars += generateOneStarHTML(true);
       }else{
-        stars += ' /star\\';
+        stars += generateOneStarHTML(false);
       }
     }
 
     return stars;
   };
 
+  const generateOneStarHTML = function(isOn){
+    if(isOn){
+      return '<img src="images/star-on.png" class="star star-on" alt="star on">';
+    }else{
+      return '<img src="images/star-off.png" class="star star-off" alt="star off">';
+    }
+  };
+
   const generateError = function(){
     if(store.errorMsg){
       const err = store.errorMsg;
       store.errorMsg = '';
-      return `Cannot add bookmark: ${err}`;
+      return err;
     }else{
       return '';
     }
   };
-
-  //// New Bookmark functionality ////
-
-
-
 
   //// Bookmark item functionality ////
 
@@ -129,7 +143,7 @@ const bookmarks = (function(){
   const handleStarFilterChange = function(){
     $('.js-star-filter').change(function(){
       console.log('Changing min filter: ', this.value);
-      store.changeMinRating(this.value);
+      store.setMinRating(this.value);
       render();
     });
   };
@@ -151,23 +165,23 @@ const bookmarks = (function(){
       event.preventDefault();
       //Grab all the data
       const title = $('.js-new-bookmark-form [name=title]').val();
-      console.log(title);
-      
       const url = $('.js-new-bookmark-form [name=url]').val();
-      console.log(url);
       const rating = $('.js-new-bookmark-form [name=rating]').val();
-      console.log(rating);
       const desc = $('.js-new-bookmark-form [name=description]').val();
+      console.log(title);
+      console.log(url);
+      console.log(rating);
       console.log(desc);
 
-
-
-      //Verify required fields
-        //set errorMsg if something fails
-
-      //If verified, add item and toggle addBookmarkWindow closed
-
-      render();
+      api.createBookmark(title, url, rating, desc, function(response){
+        store.addBookmark(response);
+        store.toggleAddingNewBookmark();
+        render();
+      }, function(response){
+        //something went wrong
+        store.setErrorMsg(`Error adding item: ${response.responseJSON.message}`);
+        render();
+      });
     });
   };
 
